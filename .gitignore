@@ -1,1 +1,5 @@
 node_modules
+cucumber-html-report
+cucumber-json
+test-results
+screenshots
