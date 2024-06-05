@@ -1,26 +1,30 @@
 import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
+import landingPage from "../../pages/landingPage.js";
+import loginPage from "../../pages/loginPage.js";
+import homePage from "../../pages/homePage.js";
+import settingsPage from "../../pages/settingsPage.js";
 
 beforeEach(function(){
     cy.fixture('conduitLoginData').as('data')
 })
 
 Given('User is on the login page', function () {
-    cy.visit('https://react-redux.realworld.io/')
-    cy.get('a[href="#login"]').click()
+    landingPage.navigateTo('https://react-redux.realworld.io/');
+    landingPage.clickSigninButton();
 })
 
 When('User login with valid credentials', function () {
-    cy.get('input[placeholder="Email"]').type(this.data.validEmail)
-    cy.get('input[placeholder="Password"]').type(this.data.validPassword)
-    cy.get('button[type="submit"]').click()
+    loginPage.enterEmail(this.data.validEmail);
+    loginPage.enterPassword(this.data.validPassword);
+    loginPage.clickSigninButton();
 })
 
 When('User click on the settings button', function () {
-    cy.get('a[href="#settings"]').click()
+   homePage.clickSettingsButton();
 })
 
 When('User click on the logout button', function () {
-    cy.get('.btn.btn-outline-danger').click()
+   settingsPage.clickLogoutButton();
 })
 
 Then('User should be routed back to login page', function () {
